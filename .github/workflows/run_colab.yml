@@ -2,7 +2,7 @@ name: Run Colab Notebook
 
 on:
   schedule:
-    - cron: '50 22 * * *'  # Schedule for 3:00 PM daily
+    - cron: '52 22 * * *'  # Schedule for 3:00 PM daily
 
 jobs:
   run-colab:
@@ -22,4 +22,4 @@ jobs:
           pip install -U -q pytz tzlocal
 
       - name: Run Colab Notebook
-        run: python Swing.py  # Replace with your actual script path
+        run: python Swing.ipynb  # Replace with your actual script path
