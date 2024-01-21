@@ -22,4 +22,4 @@ jobs:
           pip install -U -q pytz tzlocal
 
       - name: Run Colab Notebook
-        run: python Swing.ipynb  # Replace with your actual script path
+        run: python Swing.py  # Replace with your actual script path
