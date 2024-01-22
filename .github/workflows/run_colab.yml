@@ -2,7 +2,7 @@ name: Run Colab Notebook
 
 on:
   schedule:
-    - cron: '30 06 * * *'  # Schedule for 3:00 PM IST daily
+    - cron: '50 06 * * *'  # Schedule for 3:00 PM IST daily
 
 jobs:
   run-colab:
