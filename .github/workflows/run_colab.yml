@@ -2,7 +2,7 @@ name: Run Colab Notebook
 
 on:
   schedule:
-    - cron: '30 07 * * *'  # Schedule for 3:00 PM IST daily
+    - cron: '30 09 * * *'  # Schedule for 3:00 PM IST daily
 
 jobs:
   run-colab:
@@ -28,4 +28,4 @@ jobs:
           export TZ=Asia/Kolkata
 
       - name: Run Colab Notebook
-        run: python Swing.ipynb  # Replace with your actual script path
+        run: python Swing.py  # Replace with your actual script path
