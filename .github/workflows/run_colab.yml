@@ -2,7 +2,7 @@ name: Run Colab Notebook
 
 on:
   schedule:
-    - cron: '00 06 * * *'  # Schedule for 3:00 PM IST daily
+    - cron: '30 06 * * *'  # Schedule for 3:00 PM IST daily
 
 jobs:
   run-colab:
@@ -20,6 +20,7 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -U -q pytz tzlocal
+          pip install -U -q yfinance
 
       - name: Set Timezone to IST
         run: |
