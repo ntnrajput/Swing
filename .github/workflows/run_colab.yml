@@ -21,6 +21,7 @@ jobs:
         run: |
           pip install -U -q pytz tzlocal
           pip install -U -q yfinance
+          pip install -U -q matplotlib
 
       - name: Set Timezone to IST
         run: |
