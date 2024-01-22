@@ -2,7 +2,7 @@ name: Run Colab Notebook
 
 on:
   schedule:
-    - cron: '13 11 * * *'  # Schedule for 3:00 PM daily
+    - cron: '00 06 * * *'  # Schedule for 3:00 PM IST daily
 
 jobs:
   run-colab:
@@ -18,7 +18,12 @@ jobs:
           python-version: 3.x
 
       - name: Install Dependencies
-        run: pip install -U -q pytz tzlocal
+        run: |
+          pip install -U -q pytz tzlocal
+
+      - name: Set Timezone to IST
+        run: |
+          export TZ=Asia/Kolkata
 
       - name: Run Colab Notebook
-        run: python Swing.py  > output.log 2>&1  # Replace with your actual script path
+        run: python Swing.py  # Replace with your actual script path
