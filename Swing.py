@@ -1,3 +1,4 @@
+
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -100,7 +101,6 @@ def get_max (reversal_points):
 
                 if(row['Close']>last_max):
 
-
                       last_index = df_maximums.index[-1]
                       df_maximums.iloc[last_index] = [row['Date'], row['Close']]
                       # df_maximums_new = df_maximums[:-1].copy()
@@ -122,19 +122,7 @@ def get_min (reversal_points):
             if((row['Close'] > (1.05 * last_min)) or ((row['Close'] < (0.95 * last_min)) ) ):
                 df_minimums.loc[len(df_minimums.index)] = [row['Date'],row['Close']]
             else:
-                if(row['Close']<last_min):
-                    df_minimums = df_minimums[:-1]
-                    df_minimums.loc[len(df_minimums.index)] = [row['Date'],row['Close']]
-    return df_minimums
-
-
-def check_level_crossing(imp_levels_max,current_price,previous_day_price,parso_price,symbol,all_high,ma_20,ma_50):
-    global Stocks
-
-    for i in range (len(imp_levels_max)-1):
-      near_high = 0
-      levels = imp_levels_max[i]
-      if i > 0 and i< (len(imp_levels_max)-1) :
+                if(row['Close'] 0 and i< (len(imp_levels_max)-1) :
         nxt_level = imp_levels_max[i-1]
         lower_level = imp_levels_max[i+1]
       # if i == (len(imp_levels_max)-1):
@@ -193,7 +181,7 @@ for symbol in nifty_200_symbols:
         stock_data = yf.download(symbol, start=start_date, end=end_date)
         stock_data = stock_data.reset_index()  # Reset index to have 'Date' as a column
         stock_data['Symbol'] = symbol  # Add a column for stock symbol
-        stock_data = stock_data[['Symbol', 'Date', 'Close', 'Volume']]
+        stock_data = stock_data[['Symbol', 'Date', 'Close', 'Open']]
         nifty_200_data = pd.concat([nifty_200_data, stock_data])
     except Exception as e:
         print(f"Error fetching data for {symbol}: {e}")
@@ -206,13 +194,16 @@ for symbol in nifty_200_symbols:
     share_details = yf.Ticker(symbol)
     share_history = share_details.history()
     current_price = share_history['Close'].iloc[-1]
+    open_price = share_history['Open'].iloc[-1]
     previous_day_price = itc_data.iloc[-1]['Close']
     parso_price = itc_data.iloc[-2]['Close']
     all_high = max(itc_data['Close'])
 
+
     if current_price ==previous_day_price:
       previous_day_price = itc_data.iloc[-2]['Close']
       parso_price = itc_data.iloc[-3]['Close']
+      open_price = itc_data.iloc[-1]['Open']
 
 
     ma_20= itc_data['Close'].tail(20).mean()
@@ -223,6 +214,8 @@ for symbol in nifty_200_symbols:
 
     itc_data['Sign Change'] = itc_data['Change'] != itc_data['Change'].shift(1)
 
+
+    delta = current_price - open_price
 
     # Create a new DataFrame with only points where slope changes sign
     slope_change_points = itc_data[itc_data['Sign Change']]
@@ -256,7 +249,9 @@ for symbol in nifty_200_symbols:
     # plt.show()
     # print(symbol,parso_price, previous_day_price,current_price)
 
-    if current_price > previous_day_price and current_price > ma_20 and ma_20 > ma_50:
+    print(symbol, open_price, current_price, delta)
+
+    if current_price > previous_day_price and current_price > ma_20 and ma_20 > ma_50 and delta > 0:
       check_level_crossing(imp_levels_max,current_price,previous_day_price,parso_price,symbol,all_high,ma_20, ma_50)
 
 
