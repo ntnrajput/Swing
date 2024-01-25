@@ -121,7 +121,19 @@ def get_min (reversal_points):
             if((row['Close'] > (1.05 * last_min)) or ((row['Close'] < (0.95 * last_min)) ) ):
                 df_minimums.loc[len(df_minimums.index)] = [row['Date'],row['Close']]
             else:
-                if(row['Close'] 0 and i< (len(imp_levels_max)-1) :
+                if(row['Close']<last_min):
+                    df_minimums = df_minimums[:-1]
+                    df_minimums.loc[len(df_minimums.index)] = [row['Date'],row['Close']]
+    return df_minimums
+
+
+def check_level_crossing(imp_levels_max,current_price,previous_day_price,parso_price,symbol,all_high,ma_20,ma_50):
+    global Stocks
+
+    for i in range (len(imp_levels_max)-1):
+      near_high = 0
+      levels = imp_levels_max[i]
+      if i > 0 and i< (len(imp_levels_max)-1) :
         nxt_level = imp_levels_max[i-1]
         lower_level = imp_levels_max[i+1]
       # if i == (len(imp_levels_max)-1):
