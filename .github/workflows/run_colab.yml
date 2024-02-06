@@ -29,4 +29,4 @@ jobs:
           export TZ=Asia/Kolkata
 
       - name: Run Colab Notebook
-        run: python Swing.py  # Replace with your actual script path
+        run: python Swing_Week.py  # Replace with your actual script path
