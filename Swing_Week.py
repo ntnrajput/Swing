@@ -205,6 +205,9 @@ for symbol in nifty_200_symbols:
     parso_price = share_history['Close'].iloc[-3]
     all_high = max(itc_data['Close'])
 
+    delta_high = (share_history['High'].iloc[-1])-(share_history['High'].iloc[-2]) #difference between high of today and yesterday
+    delta_low = (share_history['Low'].iloc[-1])-(share_history['Low'].iloc[-2]) #difference between lows of today and yesterday
+
     today_3_4 = (share_history['Low'].iloc[-1]) + (0.75* (share_history['High'].iloc[-1]  - share_history['Low'].iloc[-1]))  # 3/4 th of the todays low
 
     ma_20= itc_data['Close'].tail(20).mean()
@@ -255,7 +258,7 @@ for symbol in nifty_200_symbols:
 
 
 
-    if current_price > previous_day_price and current_price > ma_20 and ma_20 > ma_50 and delta > 0 and current_price>today_3_4:
+    if current_price > previous_day_price and current_price > ma_20 and ma_20 > ma_50 and delta > 0 and current_price>today_3_4 and delta_high > 0 and delta_low > 0:
       check_level_crossing(imp_levels_max,current_price,previous_day_price,parso_price,symbol,all_high,ma_20, ma_50)
 
 
