@@ -12,7 +12,7 @@ Stocks = []
 def send_email(subject, body):
     sender_email = "criobd.rites@gmail.com"
     sender_password = "eqhl qvmp ruaz jrlk"
-    receiver_email = ["sumitkrrajput1@gmail.com", "ntn.rajput89@gmail.com"]
+    receiver_email = ["sumitkrrajput1@gmail.com", "ntn.rajput89@gmail.com","shankarshanky1982@gmail.com"]
 
     msg = MIMEMultipart()
     msg['From'] = sender_email
