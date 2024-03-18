@@ -140,7 +140,7 @@ def check_level_crossing(imp_levels_max,current_price,previous_day_price,parso_p
             print(imp_levels_max)
             Stocks.append([symbol,"ma 20",levels])
 
-        if (near_high == 1) and (current_price < 1.02 * levels) and (all_high > 1.02 * current_price)  :
+        if (near_high == 1) and (current_price < 1.02 * levels) and (all_high > 1.09 * current_price)  :
             print(all_high)
             print("2","time to Buy  near high", symbol, 'for crossing', levels)
             print(imp_levels_max)
