@@ -287,7 +287,7 @@ for symbol in nifty_200_symbols:
 
 
 
-    if current_price > previous_day_price and current_price > ma_20 and ma_20 > ma_50 and delta > 0 and current_price>today_3_4 and delta_high > 0 and delta_low > 0:
+    if current_price > previous_day_price and ma_20 > ma_50 and delta > 0 and current_price>today_3_4 and delta_high > 0 and delta_low > 0:
       check_level_crossing(imp_levels_max,current_price,previous_day_price,parso_price,symbol,all_high,ma_20, ma_50)
 
 
